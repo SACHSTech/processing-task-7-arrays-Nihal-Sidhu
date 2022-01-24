@@ -1,8 +1,11 @@
 import processing.core.PApplet;
 
 public class Sketch extends PApplet {
-	
-	
+	float ySpeed = 2;
+	float[] circleY = new float[25];
+  int num = 50;
+int[] x = new int[num];
+int[] y = new int[num];
   /**
    * Called once at the beginning of execution, put your size all in this method
    */
@@ -16,21 +19,55 @@ public class Sketch extends PApplet {
    * values here i.e background, stroke, fill etc.
    */
   public void setup() {
-    background(210, 255, 173);
+    background(0);
+    for (int i = 0; i < circleY.length; i++) {
+      circleY[i] = random(height);
+      y = new int[width];
+    }
   }
 
   /**
    * Called repeatedly, anything drawn to the screen goes here
    */
   public void draw() {
-	  
+	  background(0);
 	// sample code, delete this stuff
-    stroke(128);
-    line(150, 25, 270, 350);  
-
-    stroke(255);
-    line(50, 125, 70, 50);  
+  
+  for (int i = num-1; i > 0; i--) {
+    x[i] = x[i-1];
+    y[i] = y[i-1];
+  }
+  // Add the new values to the beginning of the array
+  x[0] = mouseX;
+  y[0] = mouseY;
+  // Draw the circles
+  for (int i = 0; i < num; i++) {
+    fill(255,255,255, 500);
+    ellipse(x[i], y[i], i/2, i/2);
+  }
+      for (int i = 0; i < circleY.length; i++) {
+        float circleX = width * i / circleY.length;
+        ellipse(circleX, circleY[i], 25, 25);
+        
+        circleY[i]++;
+    
+        if (circleY[i] > height) {
+          circleY[i] = 0;
+        }
+        if (keyPressed) {
+          if (keyCode == UP) {
+            circleY[i]=circleY[i]+5;
+          } 
+          else if (keyCode == DOWN) {
+            circleY[i]=circleY[i]+1/2;
+          } 
+            } 
+            else{
+              circleY[i]=circleY[i]+2;
+            }
+      
   }
   
   // define other methods down here.
+}
 }
