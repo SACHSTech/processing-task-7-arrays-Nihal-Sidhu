@@ -6,6 +6,7 @@ public class Sketch extends PApplet {
   int num = 50;
 int[] x = new int[num];
 int[] y = new int[num];
+
   /**
    * Called once at the beginning of execution, put your size all in this method
    */
